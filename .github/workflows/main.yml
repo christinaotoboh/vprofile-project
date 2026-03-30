@@ -80,15 +80,15 @@ jobs:
       - name: Create Beanstalk application version
         run: |
            aws elasticbeanstalk create-application-version \
-             --application-name ${{ secrets.EB_APPLICATION_NAME }} \
+             --application-name ${{ secrets.APPLICATION_NAME }} \
              --version-label ${{ env.VERSION_LABEL }} \
              --source-bundle S3Bucket=${{ secrets.S3_BUCKET }},S3Key=${{ env.VERSION_LABEL }}.war
 
       - name: Deploy to Beanstalk
         run: |
           aws elasticbeanstalk update-environment \
-            --application-name ${{ secrets.EB_APPLICATION_NAME }} \
-            --environment-name ${{ secrets.EB_ENVIRONMENT_NAME }} \
+            --application-name ${{ secrets.APPLICATION_NAME }} \
+            --environment-name ${{ secrets.ENVIRONMENT_NAME }} \
             --version-label ${{ env.VERSION_LABEL }}
 
       - name: Deployment complete
